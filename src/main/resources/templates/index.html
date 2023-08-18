@@ -13,7 +13,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}" th:text="#{home.title}">Igreja</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -32,71 +33,61 @@
         </div>
     </div>
 </nav>
-<div class="container py-5">
-    <div class="container">
-<!--        <div class="row">-->
-<!--            <div class="col-md-8">-->
-<!--                <h1 th:text="#{home.greeting}"></h1>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <form action="#" th:action="@{/changeLanguage}" method="get">-->
-<!--                    <select name="lang" class="form-control">-->
-<!--                        <option value="pt_BR" th:text="#{language.portuguese}"></option>-->
-<!--                        <option value="es_PY" th:text="#{language.spanish}"></option>-->
-<!--                    </select>-->
-<!--                    <input type="submit" th:value="#{language.change}" class="btn btn-primary"/>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-        <!--Formulário de Cadastro de Fiel-->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                <div th:if="${successMessage}" class="alert alert-success" role="alert">
-                    <span th:text="${successMessage}"></span>
+<main class="content">
+    <div class="container py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                            <span th:text="${successMessage}"></span>
+                        </div>
+                        <h2 th:text="#{form.faithfull.register.title}">Cadastro de Fiel</h2>
+                        <form action="#" th:action="@{/faithful}" method="post" th:object="${faithful}">
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label" th:text="#{form.faithfull.register.fullname}">Nome
+                                    Completo:</label>
+                                <input type="text" class="form-control" th:field="*{fullName}" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phoneNumber" class="form-label"
+                                       th:text="#{form.faithfull.register.phonenumber}">Telefone:</label>
+                                <input type="tel" class="form-control" th:field="*{phoneNumber}" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="birthDay" class="form-label" th:text="#{form.faithfull.register.birthday}">Data
+                                    de
+                                    Nascimento:</label>
+                                <input type="date" class="form-control" th:field="*{birthDay}" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="originCity" class="form-label"
+                                       th:text="#{form.faithfull.register.origincity}">Cidade
+                                    de Origem:</label>
+                                <input type="text" class="form-control" th:field="*{originCity}"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="country" class="form-label"
+                                       th:text="#{form.faithfull.register.country}">País:</label>
+                                <input type="text" class="form-control" th:field="*{country}" required/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="originNetwork" class="form-label"
+                                       th:text="#{form.faithfull.register.originnetwork}">Como Conheceu a
+                                    Igreja:</label>
+                                <select th:field="*{originNetwork}" class="form-control" required>
+                                    <option th:each="network : ${T(br.com.joy.enums.ESocialMedia).values()}"
+                                            th:value="${network}" th:text="${network}"></option>
+                                </select>
+                            </div>
+                            <input type="submit" th:value="#{form.faithfull.register.submit}" class="btn btn-success"/>
+                        </form>
+                    </div>
                 </div>
-                <h2 th:text="#{form.faithfull.register.title}">Cadastro de Fiel</h2>
-                <form action="#" th:action="@{/faithful}" method="post" th:object="${faithful}">
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label" th:text="#{form.faithfull.register.fullname}">Nome
-                            Completo:</label>
-                        <input type="text" class="form-control" th:field="*{fullName}" required/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phoneNumber" class="form-label" th:text="#{form.faithfull.register.phonenumber}">Telefone:</label>
-                        <input type="tel" class="form-control" th:field="*{phoneNumber}" required/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="birthDay" class="form-label" th:text="#{form.faithfull.register.birthday}">Data de
-                            Nascimento:</label>
-                        <input type="date" class="form-control" th:field="*{birthDay}" required/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="originCity" class="form-label" th:text="#{form.faithfull.register.origincity}">Cidade
-                            de Origem:</label>
-                        <input type="text" class="form-control" th:field="*{originCity}"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="country" class="form-label"
-                               th:text="#{form.faithfull.register.country}">País:</label>
-                        <input type="text" class="form-control" th:field="*{country}" required/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="originNetwork" class="form-label"
-                               th:text="#{form.faithfull.register.originnetwork}">Como Conheceu a Igreja:</label>
-                        <select th:field="*{originNetwork}" class="form-control" required>
-                            <option th:each="network : ${T(br.com.joy.enums.ESocialMedia).values()}"
-                                    th:value="${network}" th:text="${network}"></option>
-                        </select>
-                    </div>
-                    <input type="submit" th:value="#{form.faithfull.register.submit}" class="btn btn-success"/>
-                </form>
-            </div>
             </div>
         </div>
     </div>
-</div>
-</body>
+</main>
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -123,4 +114,5 @@
         </div>
     </div>
 </footer>
+</body>
 </html>
