@@ -17,7 +17,7 @@ public class FaithfulForm {
     private String fullName;
     private String phoneNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthDay;
+    private LocalDate birthday;
     private String originCity;
     private String country;
     private ESocialMedia originNetwork;

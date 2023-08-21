@@ -11,24 +11,14 @@ import org.springframework.stereotype.Service;
 public class FaithfulService {
 
     private final FaithfulRepository faithfulRepository;
-    public FaithfulDTO saveFaithfull(FaithfulDTO faithfulDTO) {
-        Faithful faithful = new Faithful();
-
-        faithful.setFullName(faithfulDTO.fullName());
-        faithful.setPhoneNumber(faithfulDTO.phoneNumber());
-        faithful.setBirthday(faithfulDTO.birthDay());
-        faithful.setOriginCity(faithfulDTO.originCity());
-        faithful.setCountry(faithfulDTO.country());
-        faithful.setOriginNetwork(faithfulDTO.originNetwork());
-        faithful = faithfulRepository.save(faithful);
-
-        return new FaithfulDTO(faithful.getId(),
-                faithful.getFullName(),
-                faithful.getPhoneNumber(),
-                faithful.getBirthday(),
-                faithful.getOriginCity(),
-                faithful.getCountry(),
-                faithful.getOriginNetwork(),
-                faithful.getCreatedDate());
+    public FaithfulDTO saveFaithful(FaithfulDTO faithfulDTO) {
+        return new FaithfulDTO(faithfulRepository.save(Faithful.builder()
+                                                        .fullName(faithfulDTO.fullName())
+                                                        .phoneNumber(faithfulDTO.phoneNumber())
+                                                        .birthday(faithfulDTO.birthDay())
+                                                        .originCity(faithfulDTO.originCity())
+                                                        .country(faithfulDTO.country())
+                                                        .originNetwork(faithfulDTO.originNetwork())
+                                                        .build()));
     }
 }

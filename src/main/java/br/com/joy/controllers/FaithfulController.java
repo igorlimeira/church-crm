@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Locale;
 
@@ -39,7 +38,7 @@ public class FaithfulController {
         }
 
         FaithfulDTO faithfulDTO = convertToDTO(faithfulForm);
-        faithfulService.saveFaithfull(faithfulDTO);
+        faithfulService.saveFaithful(faithfulDTO);
         model.addAttribute("successMessage", messageSource.getMessage("registration.success",null, locale));
 //        String successMessage = messageSource.getMessage("registration.success", null, locale);
 //        redirectAttributes.addFlashAttribute("successMessage", successMessage);
@@ -52,7 +51,7 @@ public class FaithfulController {
                 faithfulForm.getId(),
                 faithfulForm.getFullName(),
                 faithfulForm.getPhoneNumber(),
-                faithfulForm.getBirthDay(),
+                faithfulForm.getBirthday(),
                 faithfulForm.getOriginCity(),
                 faithfulForm.getCountry(),
                 faithfulForm.getOriginNetwork(),
