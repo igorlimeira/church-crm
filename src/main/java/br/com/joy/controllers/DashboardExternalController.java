@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping("/dashboardExternal")
 @AllArgsConstructor
-public class DashboardAngularController {
+public class DashboardExternalController {
 
     private final DashboardService dashboardService;
     @GetMapping("/country/{country}")
@@ -31,5 +31,18 @@ public class DashboardAngularController {
         return ResponseEntity.ok(dashboardService.getPeopleSameCountry(country));
     }
 
-}
+    @GetMapping("/city/list")
+    public ResponseEntity<Set<String>> getAllCities() {
+        return ResponseEntity.ok(dashboardService.getAllCities());
+    }
 
+    @GetMapping("/city/list/{city}")
+    public ResponseEntity<List<FaithfulDTO>> getPeopleSameCity(@PathVariable String city) {
+        return ResponseEntity.ok(dashboardService.getPeopleSameCity(city));
+    }
+
+    @GetMapping("/people")
+    public ResponseEntity<List<FaithfulDTO>> getAllCreatedThisMonth() {
+        return ResponseEntity.ok(dashboardService.getAllCreatedThisMonth());
+    }
+}

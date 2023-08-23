@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping("/faithfulAngular")
+@RequestMapping("/faithfulExternal")
 @AllArgsConstructor
-public class FaithfulAngularController {
+public class FaithfulExternalController {
 
     private final FaithfulService faithfulService;
 
