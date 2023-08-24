@@ -15,7 +15,7 @@ public class FaithfulService {
         return new FaithfulDTO(faithfulRepository.save(Faithful.builder()
                                                         .fullName(faithfulDTO.fullName())
                                                         .phoneNumber(faithfulDTO.phoneNumber())
-                                                        .birthday(faithfulDTO.birthDay())
+                                                        .birthday(faithfulDTO.birthday())
                                                         .originCity(faithfulDTO.originCity())
                                                         .country(faithfulDTO.country())
                                                         .originNetwork(faithfulDTO.originNetwork())

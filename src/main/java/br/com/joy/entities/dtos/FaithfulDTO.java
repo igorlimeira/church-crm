@@ -13,7 +13,7 @@ public record FaithfulDTO(
         Long id,
         String fullName,
         String phoneNumber,
-        LocalDate birthDay,
+        LocalDate birthday,
         String originCity,
         String country,
         ESocialMedia originNetwork,
