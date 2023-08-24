@@ -13,6 +13,6 @@ public class LanguageController {
     @RequestMapping("/changeLanguage")
     public String changeLanguage(@RequestParam("lang") String language, HttpServletRequest request) {
         request.getSession().setAttribute("org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE", new Locale(language));
-        return "redirect:/";
+        return "redirect:/faithful";
     }
 }

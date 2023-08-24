@@ -25,6 +25,10 @@ spring:
     open-in-view: false
   thymeleaf:
     encoding: ISO_8859_1
+#  http:
+#    encoding:
+#      charset: ISO-8859-1
+#      force: true
   messages:
     basename: i18n/messages
     encoding: ISO_8859_1

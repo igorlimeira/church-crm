@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt_BR">
 <head>
     <title th:text="#{home.title}"></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -18,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Outras opÃ§Ãµes de menu podem ser adicionadas aqui -->
+            <!-- Outras opções de menu podem ser adicionadas aqui -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <form action="#" th:action="@{/changeLanguage}" method="get" class="d-flex">
@@ -33,11 +32,76 @@
         </div>
     </div>
 </nav>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('/faithful/faith/last30days')
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(entry => entry.date);
+            const values = data.map(entry => entry.count);
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Usuários Cadastrados",
+                        data: values,
+                        backgroundColor: 'rgb(255,255,255)', // Cor de fundo mais suave
+                        borderColor: '#ff6600', // A mesma cor do botão e das âncoras hover
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,  // Ativa o redimensionamento responsivo
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                precision: 0,
+                                color: '#f0f0f0' // Cor dos rótulos dos eixos
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#f0f0f0' // Cor dos rótulos dos eixos
+                            }
+                        }
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: '#f0f0f0', // Cor da legenda
+                            fontFamily: 'Arial, sans-serif' // Fonte da legenda
+                        }
+                    },
+                    tooltips: {
+                        titleFontFamily: 'Arial, sans-serif', // Fonte das tooltips
+                        bodyFontFamily: 'Arial, sans-serif', // Fonte das tooltips
+                        cornerRadius: 4 // Raio dos cantos arredondados das tooltips
+                    }
+                }
+            });
+        });
+</script>
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-12">-->
+<!--            <div class="chart-container">-->
+<!--                <div style="width: 70%; max-width: 800px; height: auto; ">-->
+<!--                    <canvas id="myChart"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <main class="content">
     <div class="container py-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-7">
                     <div class="card">
                         <div th:if="${successMessage}" class="alert alert-success" role="alert">
                             <span th:text="${successMessage}"></span>
@@ -68,7 +132,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="country" class="form-label"
-                                       th:text="#{form.faithfull.register.country}">PaÃ­s:</label>
+                                       th:text="#{form.faithfull.register.country}">País:</label>
                                 <input type="text" class="form-control" th:field="*{country}" required/>
                             </div>
                             <div class="mb-3">
@@ -84,6 +148,14 @@
                         </form>
                     </div>
                 </div>
+                <!-- Coluna do Gráfico -->
+                <div class="col-md-5">
+                    <div class="chart-container">
+                        <div style="width: 100%; max-width: 800px; height: auto; ">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -92,14 +164,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h5 th:text="#{footer.about}">Sobre NÃ³s</h5>
+                <h5 th:text="#{footer.about}">Sobre Nós</h5>
                 <p th:text="#{footer.about.description}">Somos uma comunidade acolhedora. Venha nos visitar!</p>
             </div>
             <div class="col-md-4">
                 <h5 th:text="#{footer.links}">Links Importantes</h5>
                 <ul class="list-unstyled">
-                    <li><a th:href="@{/privacy}" th:text="#{footer.privacy.policy}">PolÃ­tica de Privacidade</a></li>
-                    <li><a th:href="@{/terms}" th:text="#{footer.terms.of.service}">Termos de ServiÃ§o</a></li>
+                    <li><a th:href="@{/privacy}" th:text="#{footer.privacy.policy}">Política de Privacidade</a></li>
+                    <li><a th:href="@{/terms}" th:text="#{footer.terms.of.service}">Termos de Serviço</a></li>
                     <li><a th:href="@{/contact}" th:text="#{footer.contact}">Contato</a></li>
                 </ul>
             </div>
