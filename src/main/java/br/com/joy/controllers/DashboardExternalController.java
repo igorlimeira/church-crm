@@ -3,6 +3,7 @@ package br.com.joy.controllers;
 import br.com.joy.entities.dtos.FaithfulDTO;
 import br.com.joy.services.DashboardService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 public class DashboardExternalController {
 
+    @Autowired
     private final DashboardService dashboardService;
+
     @GetMapping("/country/{country}")
-    public ResponseEntity<Integer> getNumberPeopleSameCountry(@PathVariable String country) {
+    public ResponseEntity<Integer> getNumberPeopleSameCountry(@PathVariable("country") String country) {
         return ResponseEntity.ok(dashboardService.getNumberPeopleSameCountry(country));
     }
 
@@ -27,7 +30,7 @@ public class DashboardExternalController {
     }
 
     @GetMapping("/country/list/{country}")
-    public ResponseEntity<List<FaithfulDTO>> getPeopleSameCountry(@PathVariable String country) {
+    public ResponseEntity<List<FaithfulDTO>> getPeopleSameCountry(@PathVariable("country") String country) {
         return ResponseEntity.ok(dashboardService.getPeopleSameCountry(country));
     }
 
@@ -37,7 +40,7 @@ public class DashboardExternalController {
     }
 
     @GetMapping("/city/list/{city}")
-    public ResponseEntity<List<FaithfulDTO>> getPeopleSameCity(@PathVariable String city) {
+    public ResponseEntity<List<FaithfulDTO>> getPeopleSameCity(@PathVariable("city") String city) {
         return ResponseEntity.ok(dashboardService.getPeopleSameCity(city));
     }
 

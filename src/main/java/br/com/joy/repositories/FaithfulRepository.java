@@ -12,7 +12,7 @@ public interface FaithfulRepository extends JpaRepository<Faithful, Long> {
 
     List<Faithful> findAllByCountry(String country);
 
-    List<Faithful> findAllByCountryAndCity(String country, String city);
+    List<Faithful> findAllByCountryAndOriginCity(String country, String city);
 
     List<FaithfulDTO> findAllByCreatedDate(LocalDateTime localDateTime);
 }

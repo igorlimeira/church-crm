@@ -5,6 +5,7 @@ import br.com.joy.entities.dtos.FaithfulDTO;
 import br.com.joy.enums.Paraguay;
 import br.com.joy.repositories.FaithfulRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class DashboardService {
 
+    @Autowired
     private final FaithfulRepository faithfulRepository;
 
     public Integer getNumberPeopleSameCountry(String country) {
@@ -38,7 +40,7 @@ public class DashboardService {
     }
 
     public List<FaithfulDTO> getPeopleSameCity(String city) {
-        return faithfulRepository.findAllByCountryAndCity(Paraguay.PARAGUAY.getValue(), city).stream()
+        return faithfulRepository.findAllByCountryAndOriginCity(Paraguay.PARAGUAY.getValue(), city).stream()
                 .map(FaithfulDTO::new).toList();
     }
 
