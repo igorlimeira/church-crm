@@ -14,7 +14,7 @@ public class WebConfig {
     public FilterRegistrationBean<CharacterEncodingFilter> customCharacterEncodingFilter() {
         FilterRegistrationBean<CharacterEncodingFilter> registrationBean = new FilterRegistrationBean<>();
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding(StandardCharsets.ISO_8859_1.name());
+        filter.setEncoding(StandardCharsets.UTF_8.name());
         filter.setForceEncoding(true);
         registrationBean.setFilter(filter);
         return registrationBean;

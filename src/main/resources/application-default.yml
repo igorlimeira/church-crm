@@ -3,12 +3,12 @@ application:
   version: 1.0.0
 server:
   port: 8080
-  tomcat:
-    uri-encoding: ISO_8859_1
-  servlet:
-    encoding:
-      charset: ISO_8859_1
-      force: true
+#  tomcat:
+#    uri-encoding: ISO_8859_1
+#  servlet:
+#    encoding:
+#      charset: ISO_8859_1
+#      force: true
 spring:
   datasource:
     url: jdbc:h2:mem:church-db
@@ -27,6 +27,6 @@ spring:
     encoding: ISO_8859_1
   messages:
     basename: i18n/messages
-    encoding: ISO_8859_1
+#    encoding: ISO_8859_1
   main:
     allow-bean-definition-overriding: true

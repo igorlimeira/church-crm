@@ -1,6 +1,8 @@
 package br.com.joy.services;
 
 import br.com.joy.entities.Faithful;
+import br.com.joy.entities.dtos.ChartDataDTO;
+import br.com.joy.entities.dtos.ChartDataResultDTO;
 import br.com.joy.entities.dtos.FaithfulDTO;
 import br.com.joy.enums.Paraguay;
 import br.com.joy.repositories.FaithfulRepository;
@@ -9,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -21,16 +22,29 @@ public class DashboardService {
     @Autowired
     private final FaithfulRepository faithfulRepository;
 
-    public Integer getNumberPeopleSameCountry(String country) {
-        return faithfulRepository.findAllByCountry(country).size();
+    public ChartDataDTO getNumberPeopleSameCountry(String country) {
+        List<Faithful> faithfuls = this.faithfulRepository.findAllByCountry(country);
+        Map<String, Long> countryCountMap = faithfuls.stream()
+                .collect(Collectors.groupingBy(Faithful::getOriginCity, Collectors.counting()));
+        return new ChartDataDTO(this.processChartInfo(countryCountMap));
+    }
+
+    private List<ChartDataResultDTO> processChartInfo(Map<String, Long> countryCountMap) {
+        List<ChartDataResultDTO> data = countryCountMap.entrySet().stream()
+                .map(entry -> new ChartDataResultDTO(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+        return data;
     }
 
     public List<FaithfulDTO> getPeopleSameCountry(String country) {
         return faithfulRepository.findAllByCountry(country).stream().map(FaithfulDTO::new).toList();
     }
 
-    public Set<String> getAllCountry() {
-        return faithfulRepository.findAll().stream().map(Faithful::getCountry).collect(Collectors.toSet());
+    public ChartDataDTO getAllCountry() {
+        List<Faithful> faithfuls = this.faithfulRepository.findAll();
+        Map<String, Long> countryCountMap = faithfuls.stream()
+                .collect(Collectors.groupingBy(Faithful::getCountry, Collectors.counting()));
+        return new ChartDataDTO(this.processChartInfo(countryCountMap));
     }
 
     public Set<String> getAllCities() {
