@@ -32,6 +32,7 @@ public class DashboardService {
     private List<ChartDataResultDTO> processChartInfo(Map<String, Long> countryCountMap) {
         List<ChartDataResultDTO> data = countryCountMap.entrySet().stream()
                 .map(entry -> new ChartDataResultDTO(entry.getKey(), entry.getValue()))
+                .sorted(Comparator.comparing(ChartDataResultDTO::userQty).reversed())
                 .collect(Collectors.toList());
         return data;
     }

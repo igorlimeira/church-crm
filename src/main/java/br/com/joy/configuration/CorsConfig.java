@@ -26,7 +26,7 @@ public class CorsConfig extends OncePerRequestFilter {
             response.addHeader("Access-Control-Allow-Methods",
                     "GET, POST, PUT, DELETE");
             response.setHeader("Access-Control-Allow-Headers",
-                    "Origin" +
+                    "Origin, " +
                             "Accept, " +
                             "X-Requested-With, " +
                             "Content-Type, " +
