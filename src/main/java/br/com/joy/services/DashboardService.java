@@ -3,11 +3,14 @@ package br.com.joy.services;
 import br.com.joy.entities.Faithful;
 import br.com.joy.entities.dtos.ChartDataDTO;
 import br.com.joy.entities.dtos.ChartDataResultDTO;
+import br.com.joy.entities.dtos.CountryDTO;
 import br.com.joy.entities.dtos.FaithfulDTO;
 import br.com.joy.enums.Paraguay;
 import br.com.joy.repositories.FaithfulRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,6 +25,7 @@ public class DashboardService {
     @Autowired
     private final FaithfulRepository faithfulRepository;
 
+//    @Cacheable(cacheNames  = "chart", key = "#country")
     public ChartDataDTO getNumberPeopleSameCountry(String country) {
         List<Faithful> faithfuls = this.faithfulRepository.findAllByCountry(country);
         Map<String, Long> countryCountMap = faithfuls.stream()
@@ -61,5 +65,11 @@ public class DashboardService {
 
     public List<FaithfulDTO> getAllCreatedThisMonth() {
         return faithfulRepository.findAllByCreatedDate(LocalDateTime.now().minusMonths(1));
+    }
+
+
+
+    public List<CountryDTO> countByCountry() {
+        return faithfulRepository.countByCountry();
     }
 }

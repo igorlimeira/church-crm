@@ -20,7 +20,7 @@ public class DataLoader implements ApplicationRunner {
     private Random random = new Random();
 
     private final String[] COUNTRIES = {
-            "Brazil", "Canada", "France", "Germany", "India", "Japan", "Mexico", "Russia", "South Africa", "United States", "Paraguay"
+            "Brazil", "Canada", "France", "Germany", "India", "Japan", "Mexico", "Russia", "South_Africa", "United_States", "Paraguay"
     };
 
     private final String[][] CITIES = {
@@ -46,7 +46,7 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (faithfulRepository.count() == 0) {
             List<Faithful> faithfuls = new ArrayList<>();
-            for (int i = 0; i < 15000; i++) {
+            for (int i = 0; i < 156095; i++) {
                 int countryIndex = random.nextInt(COUNTRIES.length);
                 String randomCountry = COUNTRIES[countryIndex];
                 String randomCity = CITIES[countryIndex][random.nextInt(CITIES[countryIndex].length)];

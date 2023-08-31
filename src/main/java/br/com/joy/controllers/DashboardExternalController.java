@@ -1,6 +1,7 @@
 package br.com.joy.controllers;
 
 import br.com.joy.entities.dtos.ChartDataDTO;
+import br.com.joy.entities.dtos.CountryDTO;
 import br.com.joy.entities.dtos.FaithfulDTO;
 import br.com.joy.services.DashboardService;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ public class DashboardExternalController {
 
     @GetMapping("/country/{country}")
     public ResponseEntity<ChartDataDTO> getNumberPeopleSameCountry(@PathVariable("country") String country) {
-        return ResponseEntity.ok(dashboardService.getNumberPeopleSameCountry(country));
+        return ResponseEntity.ok(dashboardService.getNumberPeopleSameCountry(country.replaceAll(" ", "_")));
     }
 
 
@@ -51,5 +53,10 @@ public class DashboardExternalController {
     @GetMapping("/people")
     public ResponseEntity<List<FaithfulDTO>> getAllCreatedThisMonth() {
         return ResponseEntity.ok(dashboardService.getAllCreatedThisMonth());
+    }
+
+    @GetMapping("/countByCountry")
+    public ResponseEntity<List<CountryDTO>> countByCountry() {
+        return ResponseEntity.ok(dashboardService.countByCountry());
     }
 }
