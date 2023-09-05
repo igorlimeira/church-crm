@@ -1,3 +1,8 @@
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        cache: DEBUG
 application:
   title: Church CRM
   version: 1.0.0
@@ -23,8 +28,6 @@ spring:
       ddl-auto: update
     show-sql: true
     open-in-view: false
-  thymeleaf:
-    encoding: ISO_8859_1
   messages:
     basename: i18n/messages
 #    encoding: ISO_8859_1
